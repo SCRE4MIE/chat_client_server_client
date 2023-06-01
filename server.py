@@ -85,7 +85,7 @@ class Server:
 
             # Wysłanie wiadomości do każdego, że dany użytkownik dołączył do serwera.
             self.broadcast(f'{nickname} joined!'.encode(self.encode))
-            print(f'f{nickname} connected')
+            print(f'{nickname} connected')
             # Wysłanie wiadomości do użytkownika, że dołączył do chatu.
             client.send('Connected to server!'.encode(self.encode))
 
