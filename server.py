@@ -25,7 +25,7 @@ class Server:
         self.server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self.server.bind((self.host, self.port))
         self.server.listen()  # nasłuchiwanie przez serwer
-
+        print('Server ready...')
         self.receive()
 
     def broadcast(self, message):
@@ -56,12 +56,14 @@ class Server:
                     self.clients.pop(client)
                     client.close()  # zamknięcie połączenia z użytkownikiem
                     self.broadcast(f'{nickname} left!'.encode(self.encode))
+                    print(f'{nickname} left!')
                     break
             except:
                 nickname = self.clients[client][1]
                 self.clients.pop(client)
                 client.close() # zamknięcie połączenia z użytkownikiem
                 self.broadcast(f'{nickname} left!'.encode(self.encode))
+                print(f'{nickname} left!')
                 break
 
     def receive(self):
@@ -82,7 +84,8 @@ class Server:
             self.clients[client] = (client, nickname)
 
             # Wysłanie wiadomości do każdego, że dany użytkownik dołączył do serwera.
-            self.broadcast(f"{nickname} joined!".encode(self.encode))
+            self.broadcast(f'{nickname} joined!'.encode(self.encode))
+            print(f'f{nickname} connected')
             # Wysłanie wiadomości do użytkownika, że dołączył do chatu.
             client.send('Connected to server!'.encode(self.encode))
 
